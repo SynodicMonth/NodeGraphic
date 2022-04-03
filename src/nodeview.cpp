@@ -1,10 +1,10 @@
 #include "nodeview.h"
-
+#include <QDebug>
 NodeView::NodeView(NodeScene *scene, QWidget *parent)
     : QGraphicsView(scene, parent)
 {
     setAcceptDrops(true);
-    setDragMode(RubberBandDrag);
+    setDragMode(NoDrag);
     _nodeScene = scene;
 }
 
@@ -42,6 +42,7 @@ void NodeView::wheelEvent(QWheelEvent *event){
 
 void NodeView::mousePressEvent(QMouseEvent *event)
 {
+    //QGraphicsItem * topitem = itemAt(event->pos());
     if(event->button() == Qt::MiddleButton){
         _centerAnchor = mapToScene(QPoint(viewport()->width() / 2.0, viewport()->height() / 2.0));
         _posAnchor = event->pos();
@@ -60,6 +61,7 @@ void NodeView::mouseMoveEvent(QMouseEvent *event)
         //setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
         centerOn(_centerAnchor - offsetPos);
     }else{
+        //qDebug() << "tr";
         QGraphicsView::mouseMoveEvent(event);
     }
 }
@@ -80,14 +82,10 @@ void NodeView::dropEvent(QDropEvent *event){
     for(;startPos < data.length(); startPos += 2){
         itemName.append(data.at(startPos));
     }
-    //items.append(new NodeItem(itemName, nodeScene));
     appendNode(itemName, event);
 }
 
 void NodeView::dragEnterEvent(QDragEnterEvent *event){
-//    if(!(event->mimeData()->text().isEmpty())){
-//        event->accept();
-//    }
     event->accept();
 }
 
@@ -97,7 +95,7 @@ void NodeView::dragMoveEvent(QDragMoveEvent *event){
 
 void NodeView::appendNode(QString name, QDropEvent *event){
     if(name.compare(QString("Image")) == 0){
-        _items.append(new NodeItem(QString("Image"), _nodeScene));
+        _items.append(new NodeItem(_nodeScene));
         _nodeScene->addItem(_items.last());
         _items.last()->setPos(mapToScene(event->pos()));
     }

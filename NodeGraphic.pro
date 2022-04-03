@@ -29,14 +29,20 @@ SOURCES += \
     src/nodescene.cpp \
     src/nodetree.cpp \
     src/nodeview.cpp \
-    src/nodeitem.cpp
+    src/nodeitem.cpp \
+    src/nodedata.cpp \
+    src/connection.cpp \
+    src/port.cpp
 
 HEADERS += \
         src/mainwindow.h \
     src/nodescene.h \
     src/nodetree.h \
     src/nodeview.h \
-    src/nodeitem.h
+    src/nodeitem.h \
+    src/nodedata.h \
+    src/connection.h \
+    src/port.h
 
 FORMS += \
         mainwindow.ui

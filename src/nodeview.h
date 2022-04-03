@@ -2,6 +2,7 @@
 #define NODEVIEW_H
 
 #include <QGraphicsView>
+#include <QGraphicsItem>
 #include <QMimeData>
 #include <QScrollBar>
 #include <QList>
