@@ -31,10 +31,13 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    void initializeNode();
+    virtual void initializeNode();
+    void initializeBoundingRect();
+    void initializePort();
+    virtual void execute();
     //static unsigned int count;
 
-protected:
+//protected:
     NodeScene *_scene;
     QRectF _boundingRect;
     QString _title;

@@ -6,6 +6,11 @@ NodeView::NodeView(NodeScene *scene, QWidget *parent)
     setAcceptDrops(true);
     setDragMode(NoDrag);
     _nodeScene = scene;
+    _outNode = new NOutput(_nodeScene);
+    _items.append(_outNode);
+    _nodeScene->addItem(_outNode);
+    _items.last()->setPos(mapToScene(1500, 1500));
+    _solver = new GraphSolver(_outNode);
 }
 
 NodeView::~NodeView(){
@@ -61,7 +66,6 @@ void NodeView::mouseMoveEvent(QMouseEvent *event)
         //setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
         centerOn(_centerAnchor - offsetPos);
     }else{
-        //qDebug() << "tr";
         QGraphicsView::mouseMoveEvent(event);
     }
 }
@@ -93,10 +97,25 @@ void NodeView::dragMoveEvent(QDragMoveEvent *event){
     event->accept();
 }
 
-void NodeView::appendNode(QString name, QDropEvent *event){
-    if(name.compare(QString("Image")) == 0){
-        _items.append(new NodeItem(_nodeScene));
-        _nodeScene->addItem(_items.last());
-        _items.last()->setPos(mapToScene(event->pos()));
+void NodeView::keyPressEvent(QKeyEvent *event){
+    if(event->key() == Qt::Key_E){
+        _solver->solve();
     }
+    QGraphicsView::keyPressEvent(event);
+}
+
+void NodeView::appendNode(QString name, QDropEvent *event){
+    //TODO: Extend this
+    qDebug() << name;
+    if(name.compare(QString("Image")) == 0){
+        _items.append(new NImage(_nodeScene));
+    }else if(name.compare(QString("Output")) == 0){
+        _items.append(new NOutput(_nodeScene));
+    }else if(name.compare(QString("Add")) == 0){
+        _items.append(new NAdd(_nodeScene));
+    }else{
+        return;
+    }
+    _nodeScene->addItem(_items.last());
+    _items.last()->setPos(mapToScene(event->pos()));
 }

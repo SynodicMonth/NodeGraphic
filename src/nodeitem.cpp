@@ -1,4 +1,5 @@
 #include "nodeitem.h"
+#include <QDebug>
 #define LINEHEIGHT 50
 
 NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
@@ -12,26 +13,6 @@ NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
     _font.setPointSize(20);
     connect(this, SIGNAL(clearSelected()), nodeScene, SLOT(_clearSelected()));
     //_id = NodeItem::count++;
-    initializeNode();
-    QFontMetrics fontMetrics = QFontMetrics(_font);
-    int titleWidth = fontMetrics.width(_title);
-    int inPortWidth = 0, outPortWidth = 0;
-    for(int i = 0; i < _in.size(); i++){
-        inPortWidth = qMax(inPortWidth, fontMetrics.width(_in[i]->getName()));
-    }
-    for(int i = 0; i < _out.size(); i++){
-        outPortWidth = qMax(outPortWidth, fontMetrics.width((_out[i]->getName())));
-    }
-    int nodeWidth = qMax(titleWidth + 20, inPortWidth + outPortWidth + 40);
-    int nodeHeight = qMax(_in.size(), _out.size()) * LINEHEIGHT + LINEHEIGHT;
-    _boundingRect = QRectF(0, 0, nodeWidth, nodeHeight);
-    for(int i = 0; i < _in.size(); i++){
-        _in[i]->setPos(5, (i + 1.5) * LINEHEIGHT - 5);
-    }
-    for(int i = 0; i < _out.size(); i++){
-        _out[i]->setPos(_boundingRect.width() - 15, (i + 1.5) * LINEHEIGHT - 5);
-    }
-
 }
 
 NodeItem::~NodeItem(){
@@ -66,6 +47,7 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawText(QRect(20, (i + 1) * LINEHEIGHT, _boundingRect.width() - 40, LINEHEIGHT), Qt::AlignVCenter | Qt::AlignRight, _out[i]->getName());
     }
     if (option->state & QStyle::State_Selected){
+        //item is selected
         //painter->setPen(Qt::black);
         painter->setBrush(Qt::NoBrush);
         painter->drawRect(_boundingRect.adjusted(pen.width() / 2, pen.width() / 2, -pen.width() / 2, -pen.width() / 2));
@@ -75,7 +57,6 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 void NodeItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if(event->button() == Qt::LeftButton){
         setSelected(true);
-        //qDebug() << "selected";
         if(event->modifiers() != Qt::ShiftModifier){
             emit clearSelected();
         }
@@ -87,6 +68,45 @@ void NodeItem::initializeNode(){
     //TODO: OVERWRITE THIS
     _title = QString("TestNode");
     _nodetype = functionNode;
-    _in = QList<InPort *>{new InPort(_scene, imageData, "inNode1", this), new InPort(_scene, imageData, "inNode2", this), new InPort(_scene, imageData, "inNode333333333333333", this)};
+    _in = QList<InPort *>{new InPort(_scene, imageData, "inNode1", this), new InPort(_scene, imageData, "inNode2", this), new InPort(_scene, imageData, "inNode3", this)};
     _out = QList<OutPort *>{new OutPort(_scene, imageData, "outNode1", this), new OutPort(_scene, imageData, "outNode2", this)};
+}
+
+void NodeItem::initializeBoundingRect(){
+    QFontMetrics fontMetrics = QFontMetrics(_font);
+    int titleWidth = fontMetrics.width(_title);
+    int inPortWidth = 0, outPortWidth = 0;
+    for(int i = 0; i < _in.size(); i++){
+        inPortWidth = qMax(inPortWidth, fontMetrics.width(_in[i]->getName()));
+    }
+    for(int i = 0; i < _out.size(); i++){
+        outPortWidth = qMax(outPortWidth, fontMetrics.width((_out[i]->getName())));
+    }
+    int nodeWidth = qMax(titleWidth + 20, inPortWidth + outPortWidth + 40 + 5);
+    int nodeHeight = qMax(_in.size(), _out.size()) * LINEHEIGHT + LINEHEIGHT;
+    _boundingRect = QRectF(0, 0, nodeWidth, nodeHeight);
+}
+
+void NodeItem::initializePort(){
+    for(int i = 0; i < _in.size(); i++){
+        _in[i]->setPos(5, (i + 1.5) * LINEHEIGHT - 5);
+    }
+    for(int i = 0; i < _out.size(); i++){
+        _out[i]->setPos(_boundingRect.width() - 15, (i + 1.5) * LINEHEIGHT - 5);
+    }
+}
+
+void NodeItem::execute(){
+    if(_nodetype != inputNode){
+        for(int i = 0; i < _in.size(); i++){
+            qDebug() << _in[i]->_connections[0]->_in->_data;
+        }
+    }
+    qDebug() << _title;
+    for(int i = 0; i < _out.size(); i++){
+        for(int j = 0; j < _out[i]->_connections.size(); j++){
+            _out[i]->_data = new NodeData(_title);
+        }
+        qDebug() << _out[i]->_data;
+    }
 }

@@ -32,7 +32,11 @@ SOURCES += \
     src/nodeitem.cpp \
     src/nodedata.cpp \
     src/connection.cpp \
-    src/port.cpp
+    src/port.cpp \
+    src/noutput.cpp \
+    src/nimage.cpp \
+    src/nadd.cpp \
+    src/graphsolver.cpp
 
 HEADERS += \
         src/mainwindow.h \
@@ -42,7 +46,11 @@ HEADERS += \
     src/nodeitem.h \
     src/nodedata.h \
     src/connection.h \
-    src/port.h
+    src/port.h \
+    src/noutput.h \
+    src/nimage.h \
+    src/nadd.h \
+    src/graphsolver.h
 
 FORMS += \
         mainwindow.ui

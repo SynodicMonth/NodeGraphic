@@ -2,8 +2,6 @@
 #define CONNECTION_H
 
 #include "port.h"
-#include "inport.h"
-#include "outport.h"
 #include "nodedata.h"
 
 class InPort;

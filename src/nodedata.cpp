@@ -5,6 +5,11 @@ NodeData::NodeData(QImage *image){
     _datatype = imageData;
 }
 
+NodeData::NodeData(QString &string){
+    _string = &string;
+    _datatype = stringData;
+}
+
 NodeData::NodeData(int i){
     _int = i;
     _datatype = intData;

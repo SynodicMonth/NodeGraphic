@@ -45,7 +45,7 @@ void Port::redraw(){
 }
 
 QVariant Port::itemChange(GraphicsItemChange change, const QVariant &value){
-    qDebug() << "changed" << value;
+    //redraw on change
     if(change == QGraphicsItem::ItemScenePositionHasChanged){
         redraw();
     }

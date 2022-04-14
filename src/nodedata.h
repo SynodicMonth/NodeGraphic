@@ -3,17 +3,19 @@
 
 #include <QImage>
 enum Datatype{
-    imageData, intData, unknownData
+    imageData, intData, stringData, unknownData
 };
 
 class NodeData
 {
 public:
-    NodeData(QImage *_image);
+    NodeData(QImage *image);
+    NodeData(QString &string);
     NodeData(int i);
-private:
+//private:
     QImage *_image;
     int _int;
+    QString *_string;
     Datatype _datatype;
 };
 

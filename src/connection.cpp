@@ -19,6 +19,7 @@ Connection::~Connection(){
 }
 
 void Connection::redrawHanging(QPointF mousePos){
+    //redraw a hanging connection to mousePos
     prepareGeometryChange();
     QPainterPath path;
     if(_in){
@@ -31,6 +32,7 @@ void Connection::redrawHanging(QPointF mousePos){
 }
 
 void Connection::redraw(){
+    //redraw a non-hanging connection
     prepareGeometryChange();
     QPainterPath path;
     path.moveTo(QPointF(_in->scenePos().x() + 5, _in->scenePos().y() + 5));

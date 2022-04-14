@@ -58,7 +58,7 @@ public:
     int type() const{
         return Type;
     }
-private:
+//private:
     NodeData *_data;
 };
 

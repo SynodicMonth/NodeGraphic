@@ -22,8 +22,10 @@ public:
     void dropEvent(QDropEvent *event);
     void dragEnterEvent(QDragEnterEvent *event);
     void dehangConnection();
+    void hangConnection(Connection *connection);
     void keyPressEvent(QKeyEvent *event);
     Connection *_hangingConnection;
+
 
 private slots:
     void _clearSelected();

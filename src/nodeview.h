@@ -8,6 +8,13 @@
 #include <QList>
 #include "nodescene.h"
 #include "nodeitem.h"
+#include "graphsolver.h"
+#include "noutput.h"
+#include "nimage.h"
+#include "nadd.h"
+
+class GraphSolver;
+class NOutput;
 
 class NodeView : public QGraphicsView
 {
@@ -21,7 +28,10 @@ public:
     void dropEvent(QDropEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
     void appendNode(QString name, QDropEvent *event);
+    GraphSolver *_solver;
+    NOutput *_outNode;
 private:
     NodeScene *_nodeScene;
     QPointF _centerAnchor;

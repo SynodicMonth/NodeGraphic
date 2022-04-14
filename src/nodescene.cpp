@@ -7,6 +7,7 @@ NodeScene::NodeScene(QWidget *parent)
     setItemIndexMethod(QGraphicsScene::NoIndex);
     setSceneRect(QRectF(0, 0, 3000, 3000));
     _hangingConnection = nullptr;
+
 }
 
 void NodeScene::_clearSelected(){
@@ -16,27 +17,46 @@ void NodeScene::_clearSelected(){
 }
 
 void NodeScene::dehangConnection(){
+    //remove current hangingConnection
     removeItem(_hangingConnection);
     delete _hangingConnection;
     _hangingConnection = nullptr;
 }
 
+void NodeScene::hangConnection(Connection *connection){
+    //handle connection to hangingConnection
+    connection->_out = nullptr;
+    connection->_outType = unknownData;
+    _hangingConnection = connection;
+}
+
 void NodeScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
     if(_hangingConnection){
         _hangingConnection->redrawHanging(mouseEvent->scenePos());
-        //qDebug() << mouseEvent->pos();
     }
     QGraphicsScene::mouseMoveEvent(mouseEvent);
+}
+
+QGraphicsItem* getFirstPortItem(QList<QGraphicsItem *> &mouseItems){
+    //get the first port (InPort/OutPort) item in QGraphicsItem list
+    for(int i = 0;i < mouseItems.size(); i++){
+        if(mouseItems[i]->type() == OutPort::Type || mouseItems[i]->type() == InPort::Type){
+            return mouseItems[i];
+        }
+    }
+    return nullptr;
 }
 
 void NodeScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if(_hangingConnection){
         QList<QGraphicsItem *>mouseItems = items(event->scenePos());
-        QGraphicsItem *topItem = mouseItems.size() > 1 ? mouseItems[1] : nullptr;
+        QGraphicsItem *topItem = getFirstPortItem(mouseItems);
         if(topItem){
             if(_hangingConnection->_in && topItem->type() == InPort::Type){
                 InPort *inPortItem = static_cast<InPort *>(topItem);
-                if(_hangingConnection->_in->_parent != inPortItem->_parent){
+                if(_hangingConnection->_in->_parent != inPortItem->_parent && inPortItem->_connections.isEmpty()){
+                    //not the same node and inport has no connection
+                    //connect to port
                     _hangingConnection->_in->_connections.push_back(_hangingConnection);
                     inPortItem->_connections.push_back(_hangingConnection);
                     _hangingConnection->_out = inPortItem;
@@ -44,11 +64,14 @@ void NodeScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
                     _hangingConnection->redraw();
                     _hangingConnection = nullptr;
                 }else{
+                    //no port to cennect, remove current hangingConnection
                     dehangConnection();
                 }
             }else if(_hangingConnection->_out && topItem->type() == OutPort::Type){
                 OutPort *outPortItem = static_cast<OutPort *>(topItem);
                 if(_hangingConnection->_out->_parent != outPortItem->_parent){
+                    //not the same node
+                    //connect to port
                     _hangingConnection->_out->_connections.push_back(_hangingConnection);
                     outPortItem->_connections.push_back(_hangingConnection);
                     _hangingConnection->_in = outPortItem;
@@ -56,9 +79,11 @@ void NodeScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
                     _hangingConnection->redraw();
                     _hangingConnection = nullptr;
                 }else{
+                    //no port to cennect, remove current hangingConnection
                     dehangConnection();
                 }
             }else{
+                //no port to cennect, remove current hangingConnection
                 dehangConnection();
             }
         }else{
@@ -68,23 +93,28 @@ void NodeScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     QGraphicsScene::mouseReleaseEvent(event);
 }
 
-
 void NodeScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    if(!_hangingConnection){
-        QGraphicsItem *topItem = itemAt(event->scenePos(), QTransform());
-        //qDebug() << topItem->type();
-        if(topItem){
-            if(topItem->type() == OutPort::Type){
-                OutPort *outPortItem = static_cast<OutPort *>(topItem);
-                _hangingConnection = new Connection(outPortItem, nullptr, outPortItem->getDatatype(), unknownData);
-                addItem(_hangingConnection);
-            }else if(topItem->type() == InPort::Type){
-                InPort *inPortItem = static_cast<InPort *>(topItem);
+    QList<QGraphicsItem *>mouseItems = items(event->scenePos());
+    QGraphicsItem *topItem = getFirstPortItem(mouseItems);
+    if(topItem){
+        if(topItem->type() == OutPort::Type){
+            //new connection
+            OutPort *outPortItem = static_cast<OutPort *>(topItem);
+            _hangingConnection = new Connection(outPortItem, nullptr, outPortItem->getDatatype(), unknownData);
+            addItem(_hangingConnection);
+        }else if(topItem->type() == InPort::Type){
+            InPort *inPortItem = static_cast<InPort *>(topItem);
+            if(!inPortItem->_connections.isEmpty()){
+                //reconnect connection
+                hangConnection(inPortItem->_connections[0]);
+                inPortItem->_connections.removeFirst();
+            }else{
+                //new connection
                 _hangingConnection = new Connection(nullptr, inPortItem, unknownData, inPortItem->getDatatype());
                 addItem(_hangingConnection);
-            }else{
-                QGraphicsScene::mousePressEvent(event);
             }
+        }else{
+            QGraphicsScene::mousePressEvent(event);
         }
     }else{
         QGraphicsScene::mousePressEvent(event);
@@ -92,14 +122,12 @@ void NodeScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
 }
 
 void NodeScene::keyPressEvent(QKeyEvent *event){
-    if(event->key() == Qt::Key_Delete) {
-        //qDebug() << "selected items " << selectedItems().size();
+    if(event->key() == Qt::Key_Delete){
+        //delete selected item(s)
         while(!selectedItems().isEmpty()){
             QGraphicsItem *itemToRemove = selectedItems().front();
             removeItem(itemToRemove);
             delete itemToRemove;
         }
-    }else{
-        QGraphicsScene::keyPressEvent(event);
     }
 }
