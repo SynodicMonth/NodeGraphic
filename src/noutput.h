@@ -12,6 +12,7 @@ public:
     NodeData *_result;
 private:
     QLabel *_label;
+    QLabel *_dimension;
     QLineEdit *_edit;
     QImage *_nullImage;
     NodeData *_nullData;

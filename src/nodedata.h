@@ -9,6 +9,7 @@ enum Datatype{
 class NodeData
 {
 public:
+    NodeData();
     NodeData(QImage *image);
     NodeData(QString &string);
     NodeData(int i);

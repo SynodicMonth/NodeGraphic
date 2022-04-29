@@ -18,6 +18,7 @@ NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
     _layout->setColumnStretch(1, 3);
     _layout->setAlignment(Qt::AlignTop);
     _menu->setLayout(_layout);
+    _isReady = false;
     //_id = NodeItem::count++;
 }
 
@@ -127,4 +128,16 @@ void NodeItem::initializeMenu(){
 
 void NodeItem::updateMenu() const{
     _scene->_menus->setCurrentWidget(_menu);
+}
+
+NodeData* NodeItem::importData(int nodeNum){
+    if(!_in[nodeNum]->_connections.isEmpty() && _in[nodeNum]->_connections[0]->_in->_data){
+        return _in[nodeNum]->_connections[0]->_in->_data;
+    }else{
+        return nullptr;
+    }
+}
+
+void NodeItem::exportData(int nodeNum, NodeData* data){
+    _out[nodeNum]->_data = data;
 }

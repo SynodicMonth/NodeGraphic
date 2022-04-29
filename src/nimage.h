@@ -21,6 +21,7 @@ private:
     QLabel *_label;
     QLineEdit *_edit;
     QPushButton *_buttonOpenFile;
+    QLabel *_dimension;
 };
 
 #endif // NIMAGE_H

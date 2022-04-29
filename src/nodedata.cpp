@@ -14,3 +14,9 @@ NodeData::NodeData(int i){
     _int = i;
     _datatype = intData;
 }
+
+NodeData::NodeData(){
+    _int = 0;
+    _image = nullptr;
+    _datatype = unknownData;
+}
