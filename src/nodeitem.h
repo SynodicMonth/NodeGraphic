@@ -37,7 +37,8 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void updateMenu() const;
-    //NodeData importData(int nodeNum);
+    NodeData* importData(int nodeNum);
+    void exportData(int nodeNum, NodeData* data);
     virtual void initializeNode();
     virtual void initializeBoundingRect();
     virtual void initializePort();
@@ -57,6 +58,7 @@ public:
     QWidget *_menu;
     QGridLayout *_layout;
     QStackedWidget *_pmenus;
+    bool _isReady;
 
 signals:
     void clearSelected();

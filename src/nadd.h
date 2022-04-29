@@ -4,6 +4,7 @@
 #include "nodeitem.h"
 #include <QSpinBox>
 #include <QSlider>
+#include <QComboBox>
 
 class NAdd : public NodeItem
 {
@@ -13,9 +14,13 @@ public:
     void initializeNode() override;
     void execute() override;
     void initializeMenu() override;
-    QColor rgbAdd(QColor a, QColor b);
+    QColor linearDodage(QColor a, QColor b, int mixA, int mixB);
+    QColor normal(QColor a, QColor b, int mixA, int mixB);
+    QColor multiply(QColor a, QColor b, int mixA, int mixB);
 
 private:
+    QLabel *_labelCombo;
+    QComboBox *_combo;
     QSpinBox *_boxA;
     QSlider *_sliderA;
     QSpinBox *_boxB;

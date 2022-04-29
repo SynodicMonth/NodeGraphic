@@ -20,14 +20,10 @@ void NOutput::initializeNode(){
 
 void NOutput::execute(){
     //qDebug() << _in[0]->_connections;
-    if((!(_in[0]->_connections.isEmpty())) && _in[0]->_connections[0]){
-        _result = _in[0]->_connections[0]->_in->_data;
-        if(_result){
-            qDebug() << _title << ": " << _result->_image;
-        }else{
-            _result = _nullData;
-            qDebug() << _title << ": NULL";
-        }
+    _result = importData(0);
+    if(_result){
+        qDebug() << _title << ": " << _result->_image;
+        _dimension->setText(QString::number(_result->_image->size().width()) + "x" + QString::number(_result->_image->size().height()));
     }else{
         _result = _nullData;
         qDebug() << _title << ": NULL";
@@ -35,11 +31,10 @@ void NOutput::execute(){
 }
 
 void NOutput::initializeMenu(){
-    _label = new QLabel(tr("Output int"));
-    //_edit = new QLineEdit();
+    _label = new QLabel(tr("Output Dimension"));
+    _dimension = new QLabel();
     _layout->addWidget(_label, 0, 0);
-    //_layout->addWidget(_edit, 0, 1);
-    //_layout->setAlignment(Qt::AlignTop);
+    _layout->addWidget(_dimension, 0, 1);
     _scene->_menus->addWidget(_menu);
     updateMenu();
 }
