@@ -12,6 +12,12 @@ NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
     _font.setFamily("Microsoft YaHei");
     _font.setPointSize(20);
     connect(this, SIGNAL(clearSelected()), nodeScene, SLOT(_clearSelected()));
+    _menu = new QWidget();
+    _layout = new QGridLayout();
+    _layout->setColumnStretch(0, 1);
+    _layout->setColumnStretch(1, 3);
+    _layout->setAlignment(Qt::AlignTop);
+    _menu->setLayout(_layout);
     //_id = NodeItem::count++;
 }
 
@@ -22,6 +28,8 @@ NodeItem::~NodeItem(){
     foreach (OutPort *i, _out) {
         delete i;
     }
+    delete _layout;
+    delete _menu;
 }
 
 QRectF NodeItem::boundingRect() const{
@@ -61,6 +69,7 @@ void NodeItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
             emit clearSelected();
         }
     }
+    updateMenu();
     QGraphicsItem::mousePressEvent(event);
 }
 
@@ -109,4 +118,13 @@ void NodeItem::execute(){
         }
         qDebug() << _out[i]->_data;
     }
+}
+
+void NodeItem::initializeMenu(){
+    _scene->_menus->addWidget(_menu);
+    updateMenu();
+}
+
+void NodeItem::updateMenu() const{
+    _scene->_menus->setCurrentWidget(_menu);
 }

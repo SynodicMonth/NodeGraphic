@@ -4,10 +4,15 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QList>
+#include <QWidget>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QStackedWidget>
 #include <QPainter>
+#include <QLineEdit>
 #include <QStyle>
+#include <QLabel>
+#include <QGridLayout>
 #include "nodescene.h"
 #include "port.h"
 
@@ -31,9 +36,12 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void updateMenu() const;
+    //NodeData importData(int nodeNum);
     virtual void initializeNode();
-    void initializeBoundingRect();
-    void initializePort();
+    virtual void initializeBoundingRect();
+    virtual void initializePort();
+    virtual void initializeMenu();
     virtual void execute();
     //static unsigned int count;
 
@@ -46,6 +54,9 @@ public:
     QList<OutPort *> _out;
     int _id;
     Nodetype _nodetype;
+    QWidget *_menu;
+    QGridLayout *_layout;
+    QStackedWidget *_pmenus;
 
 signals:
     void clearSelected();

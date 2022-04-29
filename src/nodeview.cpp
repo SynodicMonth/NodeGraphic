@@ -1,6 +1,6 @@
 #include "nodeview.h"
 #include <QDebug>
-NodeView::NodeView(NodeScene *scene, QWidget *parent)
+NodeView::NodeView(NodeScene *scene, QLabel *imagePreview, QWidget *parent)
     : QGraphicsView(scene, parent)
 {
     setAcceptDrops(true);
@@ -11,6 +11,7 @@ NodeView::NodeView(NodeScene *scene, QWidget *parent)
     _nodeScene->addItem(_outNode);
     _items.last()->setPos(mapToScene(1500, 1500));
     _solver = new GraphSolver(_outNode);
+    _imagePreview = imagePreview;
 }
 
 NodeView::~NodeView(){
@@ -98,8 +99,10 @@ void NodeView::dragMoveEvent(QDragMoveEvent *event){
 }
 
 void NodeView::keyPressEvent(QKeyEvent *event){
+    //excecute all
     if(event->key() == Qt::Key_E){
         _solver->solve();
+        _imagePreview->setPixmap(QPixmap::fromImage(*(_outNode->_result->_image)).scaled(600, 600, Qt::KeepAspectRatio));
     }
     QGraphicsView::keyPressEvent(event);
 }

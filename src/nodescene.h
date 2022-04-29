@@ -15,7 +15,7 @@ class NodeScene : public QGraphicsScene
     Q_OBJECT
 
 public:
-    explicit NodeScene(QWidget *parent = nullptr);
+    explicit NodeScene(QStackedWidget *menus, QWidget *parent = nullptr);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -25,6 +25,7 @@ public:
     void hangConnection(Connection *connection);
     void keyPressEvent(QKeyEvent *event);
     Connection *_hangingConnection;
+    QStackedWidget *_menus;
 
 
 private slots:

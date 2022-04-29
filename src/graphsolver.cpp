@@ -15,7 +15,8 @@ void GraphSolver::solveNode(NodeItem *node){
         return;
     }
     for(int i = 0; i < node->_in.size(); i++){
-        solveNode(node->_in[i]->_connections[0]->_in->_parent);
+        if(!node->_in[i]->_connections.isEmpty())
+            solveNode(node->_in[i]->_connections[0]->_in->_parent);
     }
     node->execute();
 }

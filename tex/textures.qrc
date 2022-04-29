@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/tex">
+        <file>NullImage.png</file>
+    </qresource>
+</RCC>

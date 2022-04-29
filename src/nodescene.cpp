@@ -1,13 +1,13 @@
 #include "nodescene.h"
 #include <QDebug>
 
-NodeScene::NodeScene(QWidget *parent)
+NodeScene::NodeScene(QStackedWidget *menus, QWidget *parent)
     : QGraphicsScene(parent)
 {
     setItemIndexMethod(QGraphicsScene::NoIndex);
     setSceneRect(QRectF(0, 0, 3000, 3000));
     _hangingConnection = nullptr;
-
+    _menus = menus;
 }
 
 void NodeScene::_clearSelected(){

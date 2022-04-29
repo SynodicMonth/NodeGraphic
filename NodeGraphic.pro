@@ -54,3 +54,6 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    tex/textures.qrc

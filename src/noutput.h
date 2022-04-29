@@ -8,6 +8,13 @@ public:
     NOutput(NodeScene *nodeScene, QGraphicsItem *parent = nullptr);
     void initializeNode() override;
     void execute() override;
+    void initializeMenu() override;
+    NodeData *_result;
+private:
+    QLabel *_label;
+    QLineEdit *_edit;
+    QImage *_nullImage;
+    NodeData *_nullData;
 };
 
 #endif // NOUTPUT_H

@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QMimeData>
+#include <QPixmap>
 #include <QScrollBar>
 #include <QList>
 #include "nodescene.h"
@@ -19,7 +20,7 @@ class NOutput;
 class NodeView : public QGraphicsView
 {
 public:
-    explicit NodeView(NodeScene *scene, QWidget *parent = nullptr);
+    explicit NodeView(NodeScene *scene, QLabel *imagePreview, QWidget *parent = nullptr);
     ~NodeView();
     void wheelEvent(QWheelEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -32,12 +33,15 @@ public:
     void appendNode(QString name, QDropEvent *event);
     GraphSolver *_solver;
     NOutput *_outNode;
+    QLabel *_imagePreview;
 private:
     NodeScene *_nodeScene;
     QPointF _centerAnchor;
     QPoint _posAnchor;
     bool _isMousePressed = false;
     QList<NodeItem *> _items;
+//signals:
+//    void updateImage(QString image);
 };
 
 #endif // NODEVIEW_H
