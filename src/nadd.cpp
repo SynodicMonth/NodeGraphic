@@ -15,6 +15,8 @@ NAdd::~NAdd(){
     delete _sliderB;
     delete _boxA;
     delete _boxB;
+    delete _labelCombo;
+    delete _combo;
 }
 
 void NAdd::initializeNode(){
@@ -149,6 +151,5 @@ void NAdd::initializeMenu(){
     connect(_boxB, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), _sliderB, &QSlider::setValue);
     _sliderA->setValue(100);
     _sliderB->setValue(100);
-    _scene->_menus->addWidget(_menu);
     updateMenu();
 }

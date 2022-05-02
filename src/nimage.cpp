@@ -13,6 +13,7 @@ NImage::~NImage(){
     delete _label;
     delete _edit;
     delete _buttonOpenFile;
+    delete _dimension;
 }
 
 void NImage::initializeNode(){
@@ -42,7 +43,6 @@ void NImage::initializeMenu(){
     _layout->addWidget(_buttonOpenFile, 1, 0, 1, 2);
     _layout->addWidget(_dimension, 2, 0, 1, 2);
     connect(_buttonOpenFile, &QPushButton::clicked, this, &NImage::openImageFile);
-    _scene->_menus->addWidget(_menu);
     updateMenu();
 }
 

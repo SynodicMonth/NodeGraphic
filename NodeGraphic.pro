@@ -36,7 +36,9 @@ SOURCES += \
     src/noutput.cpp \
     src/nimage.cpp \
     src/nadd.cpp \
-    src/graphsolver.cpp
+    src/graphsolver.cpp \
+    src/ndiff.cpp \
+    src/nlut.cpp
 
 HEADERS += \
         src/mainwindow.h \
@@ -50,7 +52,9 @@ HEADERS += \
     src/noutput.h \
     src/nimage.h \
     src/nadd.h \
-    src/graphsolver.h
+    src/graphsolver.h \
+    src/ndiff.h \
+    src/nlut.h
 
 FORMS += \
         mainwindow.ui

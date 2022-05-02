@@ -112,10 +112,16 @@ void NodeView::appendNode(QString name, QDropEvent *event){
     qDebug() << name;
     if(name.compare(QString("Image")) == 0){
         _items.append(new NImage(_nodeScene));
-    }else if(name.compare(QString("Output")) == 0){
-        _items.append(new NOutput(_nodeScene));
-    }else if(name.compare(QString("Add")) == 0){
+    }
+//    else if(name.compare(QString("Output")) == 0){
+//        _items.append(new NOutput(_nodeScene));
+//    }
+    else if(name.compare(QString("Add")) == 0){
         _items.append(new NAdd(_nodeScene));
+    }else if(name.compare(QString("Diff")) == 0){
+        _items.append(new NDiff(_nodeScene));
+    }else if(name.compare(QString("Lut")) == 0){
+        _items.append(new NLut(_nodeScene));
     }else{
         return;
     }

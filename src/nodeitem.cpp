@@ -127,6 +127,7 @@ void NodeItem::initializeMenu(){
 }
 
 void NodeItem::updateMenu() const{
+    _scene->_menus->addWidget(_menu);
     _scene->_menus->setCurrentWidget(_menu);
 }
 

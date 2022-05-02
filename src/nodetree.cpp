@@ -13,7 +13,9 @@ NodeTree::NodeTree(QWidget *parent)
     _items.append(new QTreeWidgetItem(QStringList(QString("Output"))));
     _items[0]->addChild(new QTreeWidgetItem(QStringList(QString("Image"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Add"))));
-    _items[2]->addChild(new QTreeWidgetItem(QStringList(QString("Output"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Diff"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Lut"))));
+    //_items[2]->addChild(new QTreeWidgetItem(QStringList(QString("Output"))));
     insertTopLevelItems(0, _items);
     setHeaderLabel(tr("Select Nodes"));
     expandAll();

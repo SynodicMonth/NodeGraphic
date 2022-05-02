@@ -13,6 +13,8 @@
 #include "noutput.h"
 #include "nimage.h"
 #include "nadd.h"
+#include "ndiff.h"
+#include "nlut.h"
 
 class GraphSolver;
 class NOutput;

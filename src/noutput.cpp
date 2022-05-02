@@ -35,6 +35,5 @@ void NOutput::initializeMenu(){
     _dimension = new QLabel();
     _layout->addWidget(_label, 0, 0);
     _layout->addWidget(_dimension, 0, 1);
-    _scene->_menus->addWidget(_menu);
     updateMenu();
 }
