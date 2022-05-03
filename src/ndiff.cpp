@@ -45,10 +45,10 @@ void NDiff::execute(){
     if(dataA)   imageA = dataA->_image;
     if(dataB)   imageB = dataB->_image;
     if(imageA){
-        rectA = QRect(0, 0, imageA->size().width(), imageA->size().height());
+        rectA = imageA->rect();
     }
     if(imageB){
-        rectB = QRect(0, 0, imageB->size().width(), imageB->size().height());
+        rectB = imageB->rect();
     }
     QRect rectR = rectA | rectB;
     QImage *result = nullptr;
