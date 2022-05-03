@@ -122,6 +122,8 @@ void NodeView::appendNode(QString name, QDropEvent *event){
         _items.append(new NDiff(_nodeScene));
     }else if(name.compare(QString("Lut")) == 0){
         _items.append(new NLut(_nodeScene));
+    }else if(name.compare(QString("Contrast")) == 0){
+    _items.append(new NContrast(_nodeScene));
     }else{
         return;
     }

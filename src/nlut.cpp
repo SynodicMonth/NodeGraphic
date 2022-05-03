@@ -105,7 +105,6 @@ void NLut::execute(){
     QImage *result = nullptr;
     if(!rect.isEmpty()){
         result = new QImage(image->size(), QImage::Format_RGBA8888);
-        result->fill(QColor(0, 0, 0, 0));
         for(int i = 0; i < rect.width(); i++){
             for(int j = 0; j < rect.height(); j++){
                 QColor color = image->pixelColor(i, j);

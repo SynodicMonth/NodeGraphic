@@ -38,7 +38,8 @@ SOURCES += \
     src/nadd.cpp \
     src/graphsolver.cpp \
     src/ndiff.cpp \
-    src/nlut.cpp
+    src/nlut.cpp \
+    src/ncontrast.cpp
 
 HEADERS += \
         src/mainwindow.h \
@@ -54,7 +55,8 @@ HEADERS += \
     src/nadd.h \
     src/graphsolver.h \
     src/ndiff.h \
-    src/nlut.h
+    src/nlut.h \
+    src/ncontrast.h
 
 FORMS += \
         mainwindow.ui
