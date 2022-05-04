@@ -18,6 +18,8 @@ NodeTree::NodeTree(QWidget *parent)
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Contrast"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Lightness"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Saturation"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Grayscale"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Threshold"))));
     //_items[2]->addChild(new QTreeWidgetItem(QStringList(QString("Output"))));
     insertTopLevelItems(0, _items);
     setHeaderLabel(tr("Select Nodes"));

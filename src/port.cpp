@@ -35,7 +35,7 @@ void Port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     fillBlack.setColor(Qt::black);
     fillBlack.setStyle(Qt::SolidPattern);
     painter->setBrush(fillBlack);
-    painter->drawEllipse(QPoint(8, 8), 8, 8);
+    painter->drawEllipse(QPoint(8, 8), 6, 6);
 }
 
 void Port::redraw(){

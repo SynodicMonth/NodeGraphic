@@ -41,7 +41,9 @@ SOURCES += \
     src/nlut.cpp \
     src/ncontrast.cpp \
     src/nlightness.cpp \
-    src/nsaturation.cpp
+    src/nsaturation.cpp \
+    src/ngrayscale.cpp \
+    src/nthreshold.cpp
 
 HEADERS += \
         src/mainwindow.h \
@@ -60,7 +62,9 @@ HEADERS += \
     src/nlut.h \
     src/ncontrast.h \
     src/nlightness.h \
-    src/nsaturation.h
+    src/nsaturation.h \
+    src/ngrayscale.h \
+    src/nthreshold.h
 
 FORMS += \
         mainwindow.ui

@@ -18,6 +18,8 @@
 #include "ncontrast.h"
 #include "nlightness.h"
 #include "nsaturation.h"
+#include "ngrayscale.h"
+#include "nthreshold.h"
 
 class GraphSolver;
 class NOutput;

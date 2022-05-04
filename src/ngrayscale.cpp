@@ -1,7 +1,7 @@
-#include "nlightness.h"
+#include "ngrayscale.h"
 #include <QDebug>
 
-NLightness::NLightness(NodeScene *nodeScene, QGraphicsItem *parent)
+NGrayscale::NGrayscale(NodeScene *nodeScene, QGraphicsItem *parent)
     : NodeItem(nodeScene, parent)
 {
     initializeNode();
@@ -10,19 +10,19 @@ NLightness::NLightness(NodeScene *nodeScene, QGraphicsItem *parent)
     initializeMenu();
 }
 
-NLightness::~NLightness(){
+NGrayscale::~NGrayscale(){
     delete _box;
     delete _slider;
 }
 
-void NLightness::initializeNode(){
-    _title = QString("Lightness");
+void NGrayscale::initializeNode(){
+    _title = QString("Grayscale");
     _nodetype = functionNode;
     _in = QList<InPort *>{new InPort(_scene, imageData, "in", this)};
     _out = QList<OutPort *>{new OutPort(_scene, imageData, "out", this)};
 }
 
-void NLightness::execute(){
+void NGrayscale::execute(){
     NodeData *data = importData(0);
     QImage *image = nullptr;
     QRect rect;
@@ -39,8 +39,7 @@ void NLightness::execute(){
                 QColor color = image->pixelColor(i, j);
                 int l = color.lightness() * val;
                 if(l > 255) l = 255;
-                if(l < 0) l = 0;
-                result->setPixel(i, j, QColor::fromHsl(color.hslHue(), color.hslSaturation(), l).rgb());
+                result->setPixel(i, j, QColor(l, l, l).rgb());
             }
         }
         exportData(0, new NodeData(result));
@@ -48,7 +47,7 @@ void NLightness::execute(){
     qDebug() << _title;
 }
 
-void NLightness::initializeMenu(){
+void NGrayscale::initializeMenu(){
     _box = new QSpinBox();
     _box->setRange(0, 400);
     _slider = new QSlider(Qt::Horizontal);

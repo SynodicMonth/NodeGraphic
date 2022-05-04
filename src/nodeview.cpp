@@ -129,7 +129,12 @@ void NodeView::appendNode(QString name, QDropEvent *event){
         _items.append(new NLightness(_nodeScene));
     }else if(name.compare(QString("Saturation")) == 0){
     _items.append(new NSaturation(_nodeScene));
-    }else{
+    }else if(name.compare(QString("Grayscale")) == 0){
+        _items.append(new NGrayscale(_nodeScene));
+    }else if(name.compare(QString("Threshold")) == 0){
+        _items.append(new NThreshold(_nodeScene));
+    }
+    else{
         return;
     }
     _nodeScene->addItem(_items.last());
