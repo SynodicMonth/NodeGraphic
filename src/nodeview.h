@@ -16,6 +16,8 @@
 #include "ndiff.h"
 #include "nlut.h"
 #include "ncontrast.h"
+#include "nlightness.h"
+#include "nsaturation.h"
 
 class GraphSolver;
 class NOutput;

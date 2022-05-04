@@ -9,14 +9,14 @@ MainWindow::MainWindow(QWidget *parent) :
     _menus = new QStackedWidget();
     _menus->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     _menus->setMinimumWidth(600);
-    _menus->setStyleSheet("font-family : Microsoft YaHei; font-size : 20px");
+    _menus->setStyleSheet("font-family : Consolas; font-size : 18px");
     _scene = new NodeScene(_menus, this);
     _tree = new NodeTree();
     _layout = new QHBoxLayout();
     _layout->addWidget(_tree);
     _tree->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     _tree->setMinimumWidth(200);
-    _tree->setStyleSheet("font-family : Microsoft YaHei; font-size : 20px");
+    _tree->setStyleSheet("font-family : Consolas; font-size : 18px");
     _imagePreview = new QLabel();
     _imagePreview->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     _imagePreview->setMinimumSize(600, 600);

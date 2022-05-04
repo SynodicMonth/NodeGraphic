@@ -16,6 +16,8 @@ NodeTree::NodeTree(QWidget *parent)
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Diff"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Lut"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Contrast"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Lightness"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Saturation"))));
     //_items[2]->addChild(new QTreeWidgetItem(QStringList(QString("Output"))));
     insertTopLevelItems(0, _items);
     setHeaderLabel(tr("Select Nodes"));

@@ -8,7 +8,7 @@ Port::Port(NodeScene *scene, Datatype datatype, QString name, NodeItem *parent) 
     _datatype = datatype;
     _name = name;
     _parent = parent;
-    _boundingRect = QRectF(0, 0, 10, 10);
+    _boundingRect = QRectF(0, 0, 16, 16);
     setZValue(10);
     setFlag(ItemSendsScenePositionChanges);
     //_hangingConnection = nullptr;
@@ -35,7 +35,7 @@ void Port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     fillBlack.setColor(Qt::black);
     fillBlack.setStyle(Qt::SolidPattern);
     painter->setBrush(fillBlack);
-    painter->drawEllipse(QPoint(5, 5), 5, 5);
+    painter->drawEllipse(QPoint(8, 8), 8, 8);
 }
 
 void Port::redraw(){

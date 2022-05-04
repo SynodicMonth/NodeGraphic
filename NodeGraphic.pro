@@ -39,7 +39,9 @@ SOURCES += \
     src/graphsolver.cpp \
     src/ndiff.cpp \
     src/nlut.cpp \
-    src/ncontrast.cpp
+    src/ncontrast.cpp \
+    src/nlightness.cpp \
+    src/nsaturation.cpp
 
 HEADERS += \
         src/mainwindow.h \
@@ -56,7 +58,9 @@ HEADERS += \
     src/graphsolver.h \
     src/ndiff.h \
     src/nlut.h \
-    src/ncontrast.h
+    src/ncontrast.h \
+    src/nlightness.h \
+    src/nsaturation.h
 
 FORMS += \
         mainwindow.ui

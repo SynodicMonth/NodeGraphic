@@ -23,9 +23,9 @@ void Connection::redrawHanging(QPointF mousePos){
     prepareGeometryChange();
     QPainterPath path;
     if(_in){
-        path.moveTo(QPointF(_in->scenePos().x() + 5, _in->scenePos().y() + 5));
+        path.moveTo(QPointF(_in->scenePos().x() + 8, _in->scenePos().y() + 8));
     }else{
-        path.moveTo(QPointF(_out->scenePos().x() + 5, _out->scenePos().y() + 5));
+        path.moveTo(QPointF(_out->scenePos().x() + 8, _out->scenePos().y() + 8));
     }
     path.lineTo(mousePos);
     setPath(path);
@@ -35,7 +35,7 @@ void Connection::redraw(){
     //redraw a non-hanging connection
     prepareGeometryChange();
     QPainterPath path;
-    path.moveTo(QPointF(_in->scenePos().x() + 5, _in->scenePos().y() + 5));
-    path.lineTo(QPointF(_out->scenePos().x() + 5, _out->scenePos().y() + 5));
+    path.moveTo(QPointF(_in->scenePos().x() + 8, _in->scenePos().y() + 8));
+    path.lineTo(QPointF(_out->scenePos().x() + 8, _out->scenePos().y() + 8));
     setPath(path);
 }

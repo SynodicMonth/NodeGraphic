@@ -5,6 +5,7 @@ NodeView::NodeView(NodeScene *scene, QLabel *imagePreview, QWidget *parent)
 {
     setAcceptDrops(true);
     setDragMode(NoDrag);
+    setRenderHint(QPainter::Antialiasing);
     _nodeScene = scene;
     _outNode = new NOutput(_nodeScene);
     _items.append(_outNode);
@@ -124,6 +125,10 @@ void NodeView::appendNode(QString name, QDropEvent *event){
         _items.append(new NLut(_nodeScene));
     }else if(name.compare(QString("Contrast")) == 0){
     _items.append(new NContrast(_nodeScene));
+    }else if(name.compare(QString("Lightness")) == 0){
+        _items.append(new NLightness(_nodeScene));
+    }else if(name.compare(QString("Saturation")) == 0){
+    _items.append(new NSaturation(_nodeScene));
     }else{
         return;
     }

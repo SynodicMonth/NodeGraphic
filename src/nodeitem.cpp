@@ -9,8 +9,8 @@ NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
     setCacheMode(DeviceCoordinateCache);
     _scene = nodeScene;
     _title = "N/A";
-    _font.setFamily("Microsoft YaHei");
-    _font.setPointSize(20);
+    _font.setFamily("Corbel");
+    _font.setPointSize(22);
     connect(this, SIGNAL(clearSelected()), nodeScene, SLOT(_clearSelected()));
     _menu = new QWidget();
     _layout = new QGridLayout();
@@ -50,10 +50,10 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setPen(pen);
     painter->drawLine(0, LINEHEIGHT, _boundingRect.width(), LINEHEIGHT);
     for(int i = 0; i < _in.size(); i++){
-        painter->drawText(QRect(20, (i + 1) * LINEHEIGHT, _boundingRect.width() - 40, LINEHEIGHT), Qt::AlignVCenter | Qt::AlignLeft, _in[i]->getName());
+        painter->drawText(QRect(32, (i + 1) * LINEHEIGHT, _boundingRect.width() - 64, LINEHEIGHT), Qt::AlignVCenter | Qt::AlignLeft, _in[i]->getName());
     }
     for(int i = 0; i < _out.size(); i++){
-        painter->drawText(QRect(20, (i + 1) * LINEHEIGHT, _boundingRect.width() - 40, LINEHEIGHT), Qt::AlignVCenter | Qt::AlignRight, _out[i]->getName());
+        painter->drawText(QRect(32, (i + 1) * LINEHEIGHT, _boundingRect.width() - 64, LINEHEIGHT), Qt::AlignVCenter | Qt::AlignRight, _out[i]->getName());
     }
     if (option->state & QStyle::State_Selected){
         //item is selected
@@ -92,17 +92,17 @@ void NodeItem::initializeBoundingRect(){
     for(int i = 0; i < _out.size(); i++){
         outPortWidth = qMax(outPortWidth, fontMetrics.width((_out[i]->getName())));
     }
-    int nodeWidth = qMax(titleWidth + 20, inPortWidth + outPortWidth + 40 + 5);
+    int nodeWidth = qMax(titleWidth + 24, inPortWidth + outPortWidth + 64 + 8);
     int nodeHeight = qMax(_in.size(), _out.size()) * LINEHEIGHT + LINEHEIGHT;
     _boundingRect = QRectF(0, 0, nodeWidth, nodeHeight);
 }
 
 void NodeItem::initializePort(){
     for(int i = 0; i < _in.size(); i++){
-        _in[i]->setPos(5, (i + 1.5) * LINEHEIGHT - 5);
+        _in[i]->setPos(8, (i + 1.5) * LINEHEIGHT - 8);
     }
     for(int i = 0; i < _out.size(); i++){
-        _out[i]->setPos(_boundingRect.width() - 15, (i + 1.5) * LINEHEIGHT - 5);
+        _out[i]->setPos(_boundingRect.width() - 24, (i + 1.5) * LINEHEIGHT - 8);
     }
 }
 
