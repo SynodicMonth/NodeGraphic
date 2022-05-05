@@ -2,6 +2,8 @@
 #define NOUTPUT_H
 
 #include "nodeitem.h"
+#include <QPushButton>
+#include <QFileDialog>
 
 class NOutput : public NodeItem{
 public:
@@ -9,6 +11,7 @@ public:
     void initializeNode() override;
     void execute() override;
     void initializeMenu() override;
+    void saveImageFile();
     NodeData *_result;
 private:
     QLabel *_label;
@@ -16,6 +19,7 @@ private:
     QLineEdit *_edit;
     QImage *_nullImage;
     NodeData *_nullData;
+    QPushButton *_saveButton;
 };
 
 #endif // NOUTPUT_H

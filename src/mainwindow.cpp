@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(_widget);
     setWindowTitle(tr("NodeEdit"));
     setUnifiedTitleAndToolBarOnMac(true);
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 MainWindow::~MainWindow()
@@ -43,4 +44,13 @@ MainWindow::~MainWindow()
     delete _widget;
     //delete _menus;
     //delete _view;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    //excecute all
+    if(event->key() == Qt::Key_E){
+        _view->_solver->solve();
+        _imagePreview->setPixmap(QPixmap::fromImage(*(_view->_outNode->_result->_image)).scaled(600, 600, Qt::KeepAspectRatio));
+    }
+    QMainWindow::keyPressEvent(event);
 }

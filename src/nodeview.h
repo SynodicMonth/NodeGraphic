@@ -36,7 +36,7 @@ public:
     void dropEvent(QDropEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
+    void keyPressEvent(QKeyEvent *event);
     void appendNode(QString name, QDropEvent *event);
     GraphSolver *_solver;
     NOutput *_outNode;

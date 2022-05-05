@@ -33,7 +33,18 @@ void NOutput::execute(){
 void NOutput::initializeMenu(){
     _label = new QLabel(tr("Output Dimension"));
     _dimension = new QLabel();
+    _saveButton = new QPushButton("Save...");
     _layout->addWidget(_label, 0, 0);
     _layout->addWidget(_dimension, 0, 1);
+    _layout->addWidget(_saveButton, 1, 0, 1, 2);
+    connect(_saveButton, &QPushButton::clicked, this, &NOutput::saveImageFile);
     updateMenu();
+}
+
+void NOutput::saveImageFile(){
+    //save file dialog
+    QString fileName = QFileDialog::getSaveFileName(nullptr, tr("Save Image"), "D:/", tr("Image Files(*.jpg)"));
+    if(!fileName.isNull()){
+        _result->_image->save(fileName, "JPG", 100);
+    }
 }

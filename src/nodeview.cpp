@@ -6,6 +6,7 @@ NodeView::NodeView(NodeScene *scene, QLabel *imagePreview, QWidget *parent)
     setAcceptDrops(true);
     setDragMode(NoDrag);
     setRenderHint(QPainter::Antialiasing);
+    //setFocusPolicy(Qt::StrongFocus);
     _nodeScene = scene;
     _outNode = new NOutput(_nodeScene);
     _items.append(_outNode);
