@@ -28,8 +28,8 @@ private:
     QLabel *_label;
     QLineEdit *_edit;
     QPushButton *_buttonOpenFile;
-    QSpinBox *_box;
-    QSlider *_slider;
+//    QSpinBox *_box;
+//    QSlider *_slider;
     QFile *_file;
     QTextStream _stream;
     int _lutSize;

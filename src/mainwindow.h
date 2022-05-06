@@ -4,10 +4,14 @@
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QTreeWidget>
+#include <QDockWidget>
 #include <QMenuBar>
 #include <QMenu>
 #include <QMessageBox>
 #include <QStackedWidget>
+#include <QScrollArea>
+#include <QDesktopServices>
+#include <QUrl>
 #include "ngphandler.h"
 #include "nodescene.h"
 #include "nodetree.h"
@@ -35,8 +39,8 @@ private:
     Ui::MainWindow *_ui;
     NodeScene *_scene;
     NodeTree *_tree;
-    QVBoxLayout *_rightLayout;
-    QHBoxLayout *_layout;
+    //QVBoxLayout *_rightLayout;
+    //QHBoxLayout *_layout;
     QWidget *_widget;
     NodeView *_view;
     QStackedWidget *_menus;
@@ -44,6 +48,7 @@ private:
     QMenuBar *_menubar;
     QMenu *_menuFile;
     QMenu *_menuHelp;
+    QMenu *_menuView;
     QAction *_actionNew;
     QAction *_actionOpen;
     QAction *_actionSave;
@@ -51,6 +56,9 @@ private:
     QAction *_actionAbout;
     QString _fileName;
     NGPHandler *_handler;
+    QDockWidget *_treeDock;
+    QDockWidget *_previewDock;
+    QDockWidget *_menuDock;
 };
 
 #endif // MAINWINDOW_H

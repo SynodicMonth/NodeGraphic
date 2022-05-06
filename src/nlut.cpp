@@ -15,8 +15,8 @@ NLut::~NLut(){
     delete _label;
     delete _edit;
     delete _buttonOpenFile;
-    delete _box;
-    delete _slider;
+//    delete _box;
+//    delete _slider;
 }
 
 double NLut::mix(double a, double b, double c){
@@ -99,6 +99,7 @@ void NLut::execute(){
     QImage *image = nullptr;
     QRect rect;
     if(data)    image = data->_image;
+    else    exportData(0, new NodeData());
     if(image){
         rect = image->rect();
     }
@@ -124,13 +125,13 @@ void NLut::initializeMenu(){
     _layout->addWidget(_edit, 0, 1);
     _buttonOpenFile = new QPushButton("Open...");
     _layout->addWidget(_buttonOpenFile, 1, 0, 1, 2);
-    _box = new QSpinBox();
-    _slider = new QSlider(Qt::Horizontal);
-    _slider->setRange(0, 100);
-    _layout->addWidget(_box, 2, 0);
-    _layout->addWidget(_slider, 2, 1);
+//    _box = new QSpinBox();
+//    _slider = new QSlider(Qt::Horizontal);
+//    _slider->setRange(0, 100);
+//    _layout->addWidget(_box, 2, 0);
+//    _layout->addWidget(_slider, 2, 1);
     connect(_buttonOpenFile, &QPushButton::clicked, this, &NLut::openImageFile);
-    connect(_slider, &QSlider::valueChanged, _box, &QSpinBox::setValue);
-    connect(_box, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), _slider, &QSlider::setValue);
+//    connect(_slider, &QSlider::valueChanged, _box, &QSpinBox::setValue);
+//    connect(_box, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), _slider, &QSlider::setValue);
     updateMenu();
 }

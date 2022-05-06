@@ -44,6 +44,7 @@ void NDiff::execute(){
     dataB = importData(1);
     if(dataA)   imageA = dataA->_image;
     if(dataB)   imageB = dataB->_image;
+    if(!dataA && !dataB)    exportData(0, new NodeData());
     if(imageA){
         rectA = imageA->rect();
     }

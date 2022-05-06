@@ -80,6 +80,7 @@ void NAdd::execute(){
     dataB = importData(1);
     if(dataA)   imageA = dataA->_image;
     if(dataB)   imageB = dataB->_image;
+    if(!dataA && !dataB) exportData(0, new NodeData());
     if(imageA){
         rectA = QRect(0, 0, imageA->size().width(), imageA->size().height());
     }

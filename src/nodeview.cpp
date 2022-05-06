@@ -106,7 +106,7 @@ void NodeView::keyPressEvent(QKeyEvent *event){
     //excecute all
     if(event->key() == Qt::Key_E){
         _solver->solve();
-        _imagePreview->setPixmap(QPixmap::fromImage(*(_outNode->_result->_image)).scaled(600, 600, Qt::KeepAspectRatio));
+        _imagePreview->setPixmap(QPixmap::fromImage(*(_outNode->_result->_image)).scaled(_imagePreview->size(), Qt::KeepAspectRatio));
     }
     QGraphicsView::keyPressEvent(event);
 }
@@ -124,7 +124,7 @@ void NodeView::appendNode(QString name, QPointF point){
         _items.append(new NAdd(_nodeScene));
     }else if(name.compare(QString("Diff")) == 0){
         _items.append(new NDiff(_nodeScene));
-    }else if(name.compare(QString("Lut")) == 0){
+    }else if(name.compare(QString("LUT")) == 0){
         _items.append(new NLut(_nodeScene));
     }else if(name.compare(QString("Contrast")) == 0){
         _items.append(new NContrast(_nodeScene));

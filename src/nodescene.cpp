@@ -134,6 +134,7 @@ void NodeScene::keyPressEvent(QKeyEvent *event){
             }
             removeItem(item);
             delete item;
+            qDebug() << _items->size();
         }
     }
 }
@@ -141,4 +142,32 @@ void NodeScene::keyPressEvent(QKeyEvent *event){
 
 void NodeScene::syncItems(QList<NodeItem *> *items){
     _items = items;
+}
+
+void NodeScene::drawBackground(QPainter *painter, const QRectF &rect){
+    QPen pen;
+    qreal left = rect.left();
+    qreal right = rect.right();
+    qreal top = rect.top();
+    qreal bottom = rect.bottom();
+    left = (left / 128) * 128;
+    right = (right / 128) * 128;
+    top = (top / 128) * 128;
+    bottom = (bottom / 128) * 128;
+    pen.setColor(QColor(40,40,40));
+    pen.setWidth(0);
+    pen.setStyle(Qt::DashLine);
+    painter->setPen(pen);
+    for(int i = 0; i >= top; i -= 64){
+        painter->drawLine(left, i, right, i);
+    }
+    for(int i = 0; i <= bottom; i += 64){
+        painter->drawLine(left, i, right, i);
+    }
+    for(int i = 0; i <= right; i += 64){
+        painter->drawLine(i, top, i, bottom);
+    }
+    for(int i = 0; i >= left; i -= 64){
+        painter->drawLine(i, top, i, bottom);
+    }
 }

@@ -7,9 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     _ui(new Ui::MainWindow)
 {
     //_ui->setupUi(this);
+    setWindowTitle(tr("NodeGraphic -- working"));
     _menubar = new QMenuBar(this);
     _menuFile = new QMenu("File", _menubar);
     _menuHelp = new QMenu("Help", _menubar);
+    _menuView = new QMenu("View", _menubar);
     _actionNew = new QAction("New", _menuFile);
     _actionOpen = new QAction("Open", _menuFile);
     _actionSave = new QAction("Save", _menuFile);
@@ -21,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _menuHelp->addAction(_actionHelp);
     _menuHelp->addAction(_actionAbout);
     _menubar->addMenu(_menuFile);
+    _menubar->addMenu(_menuView);
     _menubar->addMenu(_menuHelp);
     _menubar->setStyleSheet("font-family : Consolas; font-size : 18px");
-    this->setMenuBar(_menubar);
     connect(_actionNew, &QAction::triggered, this, &MainWindow::newProject);
     connect(_actionOpen, &QAction::triggered, this, &MainWindow::openProject);
     connect(_actionSave, &QAction::triggered, this, &MainWindow::saveProject);
@@ -35,30 +37,49 @@ MainWindow::MainWindow(QWidget *parent) :
     _menus->setStyleSheet("font-family : Consolas; font-size : 18px");
     _scene = new NodeScene(_menus, this);
     _tree = new NodeTree();
-    _layout = new QHBoxLayout();
-    _layout->addWidget(_tree);
+//    _layout = new QHBoxLayout();
+//    _layout->addWidget(_tree);
     _tree->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     _tree->setMinimumWidth(200);
     _tree->setStyleSheet("font-family : Consolas; font-size : 20px");
     _imagePreview = new QLabel();
     _imagePreview->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     _imagePreview->setMinimumSize(600, 600);
+    QScrollArea *_preview = new QScrollArea();
+    _preview->setWidget(_imagePreview);
     _view = new NodeView(_scene, _imagePreview);
     _scene->syncItems(&_view->_items);
-    _rightLayout = new QVBoxLayout();
-    _layout->addWidget(_view);
-    _rightLayout->addWidget(_imagePreview);
-    _rightLayout->addWidget(_menus);
-    _layout->addLayout(_rightLayout);
+//    _rightLayout = new QVBoxLayout();
+//    _layout->addWidget(_view);
+//    _rightLayout->addWidget(_imagePreview);
+//    _rightLayout->addWidget(_menus);
+//    _layout->addLayout(_rightLayout);
     // _menus->addWidget()
-    _widget = new QWidget();
-    _widget->setLayout(_layout);
-    setCentralWidget(_widget);
+    //_widget = new QWidget();
+    //_widget->setLayout(_layout);
+    setCentralWidget(_view);
+    _treeDock = new QDockWidget(tr("NodeTree"), this);
+    _treeDock->setWidget(_tree);
+    _treeDock->setStyleSheet("font-family : Consolas; font-size : 18px");
+    addDockWidget(Qt::LeftDockWidgetArea, _treeDock);
+    _previewDock = new QDockWidget(tr("Output Preview Press E to refresh!!!!!!!!!!!!!!"), this);
+    _previewDock->setWidget(_preview);
+    _previewDock->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    _previewDock->setStyleSheet("font-family : Consolas; font-size : 18px");
+    _previewDock->setMaximumHeight(620);
+    addDockWidget(Qt::RightDockWidgetArea, _previewDock);
+    _menuDock = new QDockWidget(tr("Menu"), this);
+    _menuDock->setWidget(_menus);
+    _menuDock->setStyleSheet("font-family : Consolas; font-size : 18px");
+    addDockWidget(Qt::RightDockWidgetArea, _menuDock);
+    _menuView->addAction(_treeDock->toggleViewAction());
+    _menuView->addAction(_previewDock->toggleViewAction());
+    _menuView->addAction(_menuDock->toggleViewAction());
     setWindowTitle(tr("NodeEdit"));
     setUnifiedTitleAndToolBarOnMac(true);
     setFocusPolicy(Qt::StrongFocus);
     _handler = new NGPHandler(_scene, _view);
-
+    this->setMenuBar(_menubar);
 }
 
 MainWindow::~MainWindow()
@@ -66,7 +87,7 @@ MainWindow::~MainWindow()
     delete _ui;
     delete _scene;
     delete _tree;
-    delete _layout;
+    //delete _layout;
     delete _widget;
     //delete _menus;
     //delete _view;
@@ -91,8 +112,10 @@ void MainWindow::newProject(){
     }
     for(QGraphicsItem *item : itemsToRemove){
         _scene->removeItem(item);
+        _scene->_items->removeOne(static_cast<NodeItem *>(item));
         delete item;
     }
+    qDebug() << _scene->_items->size();
 }
 
 void MainWindow::openProject(){
@@ -111,9 +134,12 @@ void MainWindow::saveProject(){
 }
 
 void MainWindow::showHelp(){
-    QMessageBox::about(this, "Help", "This is a help box");
+    QUrl url(QString("https://github.com/SynodicMonth/NodeGraphic"));
+    QDesktopServices::openUrl(url);
 }
 
 void MainWindow::showAbout(){
-    QMessageBox::about(this, "Help", "This is a about box");
+    QMessageBox msg(this);
+    msg.setText("<font size='+2' face='Consolas'>BUG Reporting:<a href='https://github.com/SynodicMonth/NodeGraphic font-family='Consolas'>Github</a><br>Video:<a href='https://space.bilibili.com/26738256'>Bilibili</a><br>21-计网-郭大玮-2112052</font>");
+    msg.exec();
 }

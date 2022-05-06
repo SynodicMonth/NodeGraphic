@@ -23,7 +23,10 @@ void NOutput::execute(){
     _result = importData(0);
     if(_result){
         qDebug() << _title << ": " << _result->_image;
-        _dimension->setText(QString::number(_result->_image->size().width()) + "x" + QString::number(_result->_image->size().height()));
+        if(_result->_image)
+            _dimension->setText(QString::number(_result->_image->size().width()) + "x" + QString::number(_result->_image->size().height()));
+        else
+            _result = _nullData;
     }else{
         _result = _nullData;
         qDebug() << _title << ": NULL";

@@ -27,6 +27,7 @@ void NLightness::execute(){
     QImage *image = nullptr;
     QRect rect;
     if(data)    image = data->_image;
+    else    exportData(0, new NodeData());
     if(image){
         rect = image->rect();
     }

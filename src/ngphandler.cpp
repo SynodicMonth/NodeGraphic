@@ -58,9 +58,11 @@ void NGPHandler::open(QString filename){
             for(int i = 0; i < nItems; i++){
                 filestream >> title >> x >> y;
                 _view->appendNode(title, QPointF(x, y));
+                qDebug() << _view->_items.size();
             }
             filestream >> nConnections;
             int fromNode, fromPort, toNode, toPort;
+            qDebug() << _view->_items.size();
             for(int i = 0; i < nConnections; i++){
                 filestream >> fromNode >> fromPort >> toNode >> toPort;
                 if(toNode >= 0){

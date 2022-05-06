@@ -26,6 +26,7 @@ public:
     void hangConnection(Connection *connection);
     void keyPressEvent(QKeyEvent *event);
     void syncItems(QList<NodeItem *> *items);
+    void drawBackground(QPainter *painter, const QRectF &rect);
     Connection *_hangingConnection;
     QStackedWidget *_menus;
     QList<NodeItem *> *_items;
