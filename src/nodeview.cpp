@@ -106,7 +106,7 @@ void NodeView::keyPressEvent(QKeyEvent *event){
     //excecute all
     if(event->key() == Qt::Key_E){
         _solver->solve();
-        _imagePreview->setPixmap(QPixmap::fromImage(*(_outNode->_result->_image)).scaled(_imagePreview->size(), Qt::KeepAspectRatio));
+        _imagePreview->setPixmap(QPixmap::fromImage(*(_outNode->_result->_image)).scaled(600, 600, Qt::KeepAspectRatio));
     }
     QGraphicsView::keyPressEvent(event);
 }

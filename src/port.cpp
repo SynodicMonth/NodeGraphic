@@ -15,7 +15,7 @@ Port::Port(NodeScene *scene, Datatype datatype, QString name, NodeItem *parent) 
 }
 
 Port::~Port(){
-    foreach (Connection *i, _connections) {
+    for(Connection *i : _connections) {
         delete i;
     }
 }

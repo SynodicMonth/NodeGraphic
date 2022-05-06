@@ -80,7 +80,10 @@ void NAdd::execute(){
     dataB = importData(1);
     if(dataA)   imageA = dataA->_image;
     if(dataB)   imageB = dataB->_image;
-    if(!dataA && !dataB) exportData(0, new NodeData());
+    if(!dataA && !dataB){
+        exportData(0, new NodeData());
+        return;
+    }
     if(imageA){
         rectA = QRect(0, 0, imageA->size().width(), imageA->size().height());
     }
@@ -95,12 +98,12 @@ void NAdd::execute(){
         for(int i = 0; i < rectR.width(); i++){
             for(int j = 0; j < rectR.height(); j++){
                 QColor colorA, colorB;
-                if(rectA.contains(i, j)){
+                if(imageA && rectA.contains(i, j)){
                     colorA = imageA->pixelColor(i, j);
                 }else{
                     colorA = QColor(0, 0, 0, 0);
                 }
-                if(rectB.contains(i, j)){
+                if(imageB && rectB.contains(i, j)){
                     colorB = imageB->pixelColor(i, j);
                 }else{
                     colorB = QColor(0, 0, 0, 0);

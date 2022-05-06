@@ -8,6 +8,7 @@
 class NOutput : public NodeItem{
 public:
     NOutput(NodeScene *nodeScene, QGraphicsItem *parent = nullptr);
+    ~NOutput();
     void initializeNode() override;
     void execute() override;
     void initializeMenu() override;

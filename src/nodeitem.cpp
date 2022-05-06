@@ -22,10 +22,10 @@ NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
 }
 
 NodeItem::~NodeItem(){
-    foreach (InPort *i, _in) {
+    for(InPort *i : _in) {
         delete i;
     }
-    foreach (OutPort *i, _out) {
+    for(OutPort *i : _out) {
         delete i;
     }
     delete _layout;

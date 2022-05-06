@@ -14,7 +14,7 @@ NodeTree::NodeTree(QWidget *parent)
     _items[0]->addChild(new QTreeWidgetItem(QStringList(QString("Image"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Add"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Diff"))));
-    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Lut"))));
+    _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("LUT"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Contrast"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Lightness"))));
     _items[1]->addChild(new QTreeWidgetItem(QStringList(QString("Saturation"))));

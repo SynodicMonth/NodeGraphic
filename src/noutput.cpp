@@ -9,6 +9,9 @@ NOutput::NOutput(NodeScene *nodeScene, QGraphicsItem *parent)
     initializeMenu();
 }
 
+NOutput::~NOutput(){
+}
+
 void NOutput::initializeNode(){
     _title = QString("Output");
     _nodetype = outputNode;

@@ -15,7 +15,7 @@ void NGPHandler::save(QString filename){
             QList<QGraphicsItem *> itemList = _scene->items();
             QList<NodeItem *> nodeitems;
             QList<Connection *> connections;
-            NOutput *output;
+            NOutput *output = nullptr;
             for(QGraphicsItem *item : itemList){
                 if(item->type() == NodeItem::Type){
                     nodeitems.push_back(static_cast<NodeItem *>(item));
@@ -26,6 +26,10 @@ void NGPHandler::save(QString filename){
                 }
             }
             QTextStream filestream(&file);
+            if(!output){
+                file.close();
+                return;
+            }
             filestream << output->_title << ' ' << output->pos().x() << ' ' << output->pos().y() << endl;
             filestream << nodeitems.size() << endl;
             for(NodeItem *item : nodeitems){
