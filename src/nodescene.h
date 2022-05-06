@@ -9,6 +9,7 @@
 
 class Connection;
 class Port;
+class NodeItem;
 
 class NodeScene : public QGraphicsScene
 {
@@ -24,8 +25,10 @@ public:
     void dehangConnection();
     void hangConnection(Connection *connection);
     void keyPressEvent(QKeyEvent *event);
+    void syncItems(QList<NodeItem *> *items);
     Connection *_hangingConnection;
     QStackedWidget *_menus;
+    QList<NodeItem *> *_items;
 
 
 private slots:

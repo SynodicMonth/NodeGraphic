@@ -129,8 +129,16 @@ void NodeScene::keyPressEvent(QKeyEvent *event){
             if(item->type() == 65550){
                 continue;
             }
+            if(item->type() == NodeItem::Type){
+                _items->removeOne(static_cast<NodeItem *>(item));
+            }
             removeItem(item);
             delete item;
         }
     }
+}
+
+
+void NodeScene::syncItems(QList<NodeItem *> *items){
+    _items = items;
 }

@@ -14,6 +14,8 @@ NodeView::NodeView(NodeScene *scene, QLabel *imagePreview, QWidget *parent)
     _items.last()->setPos(mapToScene(1500, 1500));
     _solver = new GraphSolver(_outNode);
     _imagePreview = imagePreview;
+    _solver->solve();
+    _imagePreview->setPixmap(QPixmap::fromImage(*(_outNode->_result->_image)).scaled(600, 600, Qt::KeepAspectRatio));
 }
 
 NodeView::~NodeView(){

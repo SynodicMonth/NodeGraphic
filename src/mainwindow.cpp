@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _imagePreview->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     _imagePreview->setMinimumSize(600, 600);
     _view = new NodeView(_scene, _imagePreview);
+    _scene->syncItems(&_view->_items);
     _rightLayout = new QVBoxLayout();
     _layout->addWidget(_view);
     _rightLayout->addWidget(_imagePreview);
@@ -57,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setUnifiedTitleAndToolBarOnMac(true);
     setFocusPolicy(Qt::StrongFocus);
     _handler = new NGPHandler(_scene, _view);
+
 }
 
 MainWindow::~MainWindow()
