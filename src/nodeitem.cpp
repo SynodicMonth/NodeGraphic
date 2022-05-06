@@ -18,7 +18,6 @@ NodeItem::NodeItem(NodeScene *nodeScene, QGraphicsItem *parent)
     _layout->setColumnStretch(1, 3);
     _layout->setAlignment(Qt::AlignTop);
     _menu->setLayout(_layout);
-    _isReady = false;
     //_id = NodeItem::count++;
 }
 

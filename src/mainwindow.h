@@ -4,7 +4,11 @@
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QTreeWidget>
+#include <QMenuBar>
+#include <QMenu>
+#include <QMessageBox>
 #include <QStackedWidget>
+#include "ngphandler.h"
 #include "nodescene.h"
 #include "nodetree.h"
 #include "nodeview.h"
@@ -20,6 +24,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     void keyPressEvent(QKeyEvent *event);
+    void newProject();
+    void openProject();
+    void saveProject();
+    void showHelp();
+    void showAbout();
     ~MainWindow();
 
 private:
@@ -32,6 +41,16 @@ private:
     NodeView *_view;
     QStackedWidget *_menus;
     QLabel *_imagePreview;
+    QMenuBar *_menubar;
+    QMenu *_menuFile;
+    QMenu *_menuHelp;
+    QAction *_actionNew;
+    QAction *_actionOpen;
+    QAction *_actionSave;
+    QAction *_actionHelp;
+    QAction *_actionAbout;
+    QString _fileName;
+    NGPHandler *_handler;
 };
 
 #endif // MAINWINDOW_H

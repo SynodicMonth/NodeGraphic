@@ -44,6 +44,10 @@ public:
     virtual void initializePort();
     virtual void initializeMenu();
     virtual void execute();
+    enum { Type = 65542 };
+    int type() const{
+        return Type;
+    }
     //static unsigned int count;
 
 //protected:
@@ -58,7 +62,6 @@ public:
     QWidget *_menu;
     QGridLayout *_layout;
     QStackedWidget *_pmenus;
-    bool _isReady;
 
 signals:
     void clearSelected();

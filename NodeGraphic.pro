@@ -43,7 +43,8 @@ SOURCES += \
     src/nlightness.cpp \
     src/nsaturation.cpp \
     src/ngrayscale.cpp \
-    src/nthreshold.cpp
+    src/nthreshold.cpp \
+    src/ngphandler.cpp
 
 HEADERS += \
         src/mainwindow.h \
@@ -64,7 +65,8 @@ HEADERS += \
     src/nlightness.h \
     src/nsaturation.h \
     src/ngrayscale.h \
-    src/nthreshold.h
+    src/nthreshold.h \
+    src/ngphandler.h
 
 FORMS += \
         mainwindow.ui

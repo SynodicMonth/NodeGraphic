@@ -19,6 +19,10 @@ public:
     OutPort *_in;
     InPort *_out;
     Datatype _inType, _outType;
+    enum { Type = 65543 };
+    int type() const{
+        return Type;
+    }
 
 private:
     QRectF _boundingRect;

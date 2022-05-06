@@ -20,7 +20,7 @@ NodeView::~NodeView(){
 }
 
 void NodeView::wheelEvent(QWheelEvent *event){
-    if(event->modifiers() == Qt::AltModifier){
+//    if(event->modifiers() == Qt::AltModifier){
         // 获取当前鼠标相对于view的位置;
         QPointF cursorPoint = event->pos();
         // 获取当前鼠标相对于scene的位置;
@@ -45,7 +45,7 @@ void NodeView::wheelEvent(QWheelEvent *event){
         // 通过滚动条控制view放大缩小后的展示scene的位置;
         horizontalScrollBar()->setValue(int(viewPoint.x() - viewWidth * hScale));
         verticalScrollBar()->setValue(int(viewPoint.y() - viewHeight * vScale));
-    }
+    //}
 }
 
 void NodeView::mousePressEvent(QMouseEvent *event)
@@ -89,7 +89,7 @@ void NodeView::dropEvent(QDropEvent *event){
     for(;startPos < data.length(); startPos += 2){
         itemName.append(data.at(startPos));
     }
-    appendNode(itemName, event);
+    appendNode(itemName, mapToScene(event->pos()));
 }
 
 void NodeView::dragEnterEvent(QDragEnterEvent *event){
@@ -109,7 +109,7 @@ void NodeView::keyPressEvent(QKeyEvent *event){
     QGraphicsView::keyPressEvent(event);
 }
 
-void NodeView::appendNode(QString name, QDropEvent *event){
+void NodeView::appendNode(QString name, QPointF point){
     //TODO: Extend this
     qDebug() << name;
     if(name.compare(QString("Image")) == 0){
@@ -125,7 +125,7 @@ void NodeView::appendNode(QString name, QDropEvent *event){
     }else if(name.compare(QString("Lut")) == 0){
         _items.append(new NLut(_nodeScene));
     }else if(name.compare(QString("Contrast")) == 0){
-    _items.append(new NContrast(_nodeScene));
+        _items.append(new NContrast(_nodeScene));
     }else if(name.compare(QString("Lightness")) == 0){
         _items.append(new NLightness(_nodeScene));
     }else if(name.compare(QString("Saturation")) == 0){
@@ -139,5 +139,5 @@ void NodeView::appendNode(QString name, QDropEvent *event){
         return;
     }
     _nodeScene->addItem(_items.last());
-    _items.last()->setPos(mapToScene(event->pos()));
+    _items.last()->setPos(point);
 }

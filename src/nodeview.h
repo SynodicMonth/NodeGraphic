@@ -37,16 +37,17 @@ public:
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void keyPressEvent(QKeyEvent *event);
-    void appendNode(QString name, QDropEvent *event);
+    void appendNode(QString name, QPointF point);
     GraphSolver *_solver;
     NOutput *_outNode;
     QLabel *_imagePreview;
+    QList<NodeItem *> _items;
 private:
     NodeScene *_nodeScene;
     QPointF _centerAnchor;
     QPoint _posAnchor;
     bool _isMousePressed = false;
-    QList<NodeItem *> _items;
+
 //signals:
 //    void updateImage(QString image);
 };

@@ -13,6 +13,10 @@ public:
     void initializeMenu() override;
     void saveImageFile();
     NodeData *_result;
+    enum { Type = 65550 };
+    int type() const{
+        return Type;
+    }
 private:
     QLabel *_label;
     QLabel *_dimension;

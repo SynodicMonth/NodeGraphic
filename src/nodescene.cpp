@@ -124,10 +124,13 @@ void NodeScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
 void NodeScene::keyPressEvent(QKeyEvent *event){
     if(event->key() == Qt::Key_Delete){
         //delete selected item(s)
-        while(!selectedItems().isEmpty()){
-            QGraphicsItem *itemToRemove = selectedItems().front();
-            removeItem(itemToRemove);
-            delete itemToRemove;
+        QList<QGraphicsItem *>selectedItems = this->selectedItems();
+        for(QGraphicsItem *item : selectedItems){
+            if(item->type() == 65550){
+                continue;
+            }
+            removeItem(item);
+            delete item;
         }
     }
 }
