@@ -47,9 +47,6 @@ private:
     QPointF _centerAnchor;
     QPoint _posAnchor;
     bool _isMousePressed = false;
-
-//signals:
-//    void updateImage(QString image);
 };
 
 #endif // NODEVIEW_H

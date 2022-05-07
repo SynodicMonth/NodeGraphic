@@ -30,8 +30,6 @@ public:
     Connection *_hangingConnection;
     QStackedWidget *_menus;
     QList<NodeItem *> *_items;
-
-
 private slots:
     void _clearSelected();
 };
