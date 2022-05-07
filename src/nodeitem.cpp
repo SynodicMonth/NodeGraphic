@@ -38,7 +38,7 @@ QRectF NodeItem::boundingRect() const{
 
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     painter->setPen(Qt::NoPen);
-    painter->setBrush(Qt::lightGray);
+    painter->setBrush(QColor(230, 230, 230));
     painter->drawRect(_boundingRect);
     painter->setFont(_font);
     painter->setPen(Qt::black);
@@ -56,7 +56,14 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
     if (option->state & QStyle::State_Selected){
         //item is selected
-        //painter->setPen(Qt::black);
+        pen.setWidth(5);
+        pen.setColor(QColor(0, 100, 200));
+        painter->setPen(pen);
+        painter->setBrush(Qt::NoBrush);
+        painter->drawRect(_boundingRect.adjusted(pen.width() / 2, pen.width() / 2, -pen.width() / 2, -pen.width() / 2));
+    }else{
+        pen.setColor(QColor(0, 0, 0));
+        painter->setPen(pen);
         painter->setBrush(Qt::NoBrush);
         painter->drawRect(_boundingRect.adjusted(pen.width() / 2, pen.width() / 2, -pen.width() / 2, -pen.width() / 2));
     }

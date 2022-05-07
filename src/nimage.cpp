@@ -25,10 +25,9 @@ void NImage::initializeNode(){
 
 void NImage::execute(){
     qDebug() << _title << ":" << _fileName;
-    if(!_fileName.isEmpty()){
-        QImage *image = new QImage(_fileName);
-        _dimension->setText(QString::number(image->size().width()) + "x" + QString::number(image->size().height()));
-        exportData(0, new NodeData(image));
+    if(_image && !_image->isNull()){
+        _dimension->setText(QString::number(_image->size().width()) + "x" + QString::number(_image->size().height()));
+        exportData(0, new NodeData(_image));
     }
 }
 
@@ -47,7 +46,14 @@ void NImage::initializeMenu(){
 }
 
 void NImage::openImageFile(){
-    //open file dialog
-    _fileName = QFileDialog::getOpenFileName(nullptr, tr("Open Image"), "D:/", tr("Image Files(*.jpg *.png *.jpeg *.bmp)"));
+    //open file dialog restrict to jpg
+    _fileName = QFileDialog::getOpenFileName(nullptr, tr("Open Image"), "D:/", tr("Image Files(*.jpg *.jpeg *.png)"));
     _edit->setText(_fileName);
+    if(!_fileName.isEmpty()){
+        delete _image;
+        _image = new QImage(_fileName);
+        if(_image->size().width() * _image->size().height() > 1920 * 1080){
+            QMessageBox::warning(nullptr, tr("Warnig"), tr("<font size='+2' face='Consolas'>Image is too big, may slow down the program</font>"));
+        }
+    }
 }

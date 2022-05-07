@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     //_ui->setupUi(this);
     setWindowTitle(tr("NodeGraphic -- working"));
+    setWindowIcon(QIcon(":/tex/icon.png"));
     _menubar = new QMenuBar(this);
     _menuFile = new QMenu("File", _menubar);
     _menuHelp = new QMenu("Help", _menubar);
@@ -84,11 +85,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    //qDebug() << "deconstructor1";
     delete _ui;
+    //qDebug() << "deconstructor1";
     delete _scene;
+    //qDebug() << "deconstructor1";
     delete _tree;
+    //qDebug() << "deconstructor1";
     //delete _layout;
-    delete _widget;
+    //delete _widget;
+//    qDebug() << "deconstructor1";
     //delete _menus;
     //delete _view;
 }
@@ -140,6 +146,6 @@ void MainWindow::showHelp(){
 
 void MainWindow::showAbout(){
     QMessageBox msg(this);
-    msg.setText("<font size='+2' face='Consolas'>BUG Reporting:<a href='https://github.com/SynodicMonth/NodeGraphic font-family='Consolas'>Github</a><br>Video:<a href='https://space.bilibili.com/26738256'>Bilibili</a><br>21-计网-郭大玮-2112052</font>");
+    msg.setText("<font size='+2' face='Consolas'>BUG Reporting:<a href='https://github.com/SynodicMonth/NodeGraphic'>Github</a><br>Video:<a href='https://space.bilibili.com/26738256'>Bilibili</a><br>21-计网-郭大玮-2112052</font>");
     msg.exec();
 }

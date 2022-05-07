@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVector>
+#include <QCoreApplication>
 #include <QStringList>
 
 class NLut : public NodeItem

@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/tex">
         <file>NullImage.png</file>
+        <file>Watermark.png</file>
+        <file>Hutao.jpg</file>
+        <file>icon.png</file>
     </qresource>
+    <qresource prefix="/preset"/>
 </RCC>

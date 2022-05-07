@@ -26,7 +26,7 @@ double NLut::mix(double a, double b, double c){
 void NLut::openImageFile(){
     //open file dialog
     _lutData.clear();
-    _fileName = QFileDialog::getOpenFileName(nullptr, tr("Open LUT"), "D:/", tr("LUT Files(*.cube)"));
+    _fileName = QFileDialog::getOpenFileName(nullptr, tr("Open LUT"), QCoreApplication::applicationDirPath() + "/preset", tr("LUT Files(*.cube)"));
     _edit->setText(_fileName);
     _file->setFileName(_fileName);
     _file->open(QIODevice::ReadOnly | QIODevice::Text);

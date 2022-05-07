@@ -3,8 +3,10 @@
 
 #include "nodeitem.h"
 #include <QPushButton>
+#include <QMessageBox>
 #include "nodedata.h"
 #include <QFileDialog>
+#include <QCoreApplication>
 
 class NImage : public NodeItem
 {
@@ -22,6 +24,7 @@ private:
     QLineEdit *_edit;
     QPushButton *_buttonOpenFile;
     QLabel *_dimension;
+    QImage *_image;
 };
 
 #endif // NIMAGE_H
