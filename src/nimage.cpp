@@ -41,6 +41,7 @@ void NImage::initializeMenu(){
     _buttonOpenFile = new QPushButton("Open...");
     _layout->addWidget(_buttonOpenFile, 1, 0, 1, 2);
     _layout->addWidget(_dimension, 2, 0, 1, 2);
+    _image = new QImage();
     connect(_buttonOpenFile, &QPushButton::clicked, this, &NImage::openImageFile);
     updateMenu();
 }
