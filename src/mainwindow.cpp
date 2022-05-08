@@ -146,6 +146,6 @@ void MainWindow::showHelp(){
 
 void MainWindow::showAbout(){
     QMessageBox msg(this);
-    msg.setText("<font size='+2' face='Consolas'>BUG Reporting:<a href='https://github.com/SynodicMonth/NodeGraphic'>Github</a><br>Video:<a href='https://space.bilibili.com/26738256'>Bilibili</a><br>21-计网-郭大玮-2112052</font>");
+    msg.setText("<font size='+2' face='Consolas'>BUG Reporting:<a href='https://github.com/SynodicMonth/NodeGraphic'>Github</a> <a href='https://gitee.com/synodicmonth/NodeGraphic'>Gitee</a> <br>Video:<a href='https://www.bilibili.com/video/BV1jZ4y1a7L6/'>Bilibili</a><br>21-计网-郭大玮-2112052</font>");
     msg.exec();
 }
